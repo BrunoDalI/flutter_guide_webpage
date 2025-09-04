@@ -2,18 +2,19 @@ name: Deploy Flutter Web to GitHub Pages
 
 on:
   push:
-    branches: [ main, master, gh-page, feature/* ]
-  pull_request:
-    branches: [ main, master, gh-page, feature/* ]
+    branches: [ gh-page ]
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/gh-page'
 
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout
+      uses: actions/checkout@v4
     
-    - uses: subosito/flutter-action@v2
+    - name: Setup Flutter
+      uses: subosito/flutter-action@v2
       with:
         flutter-version: '3.24.0'
         channel: 'stable'
@@ -26,8 +27,7 @@ jobs:
     
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v4
-      if: github.ref == 'refs/heads/gh-page'
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./build/web
-        cname: false
+        force_orphan: true
