@@ -8,24 +8,63 @@ class CleanArchitecturePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text('Arquitetura Limpa no Flutter', style: Theme.of(context).textTheme.titleLarge?.copyWith(color: Colors.white)),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
+          
+
           Card(
-            color: Colors.indigo.shade50,
-            child: Padding(
-              padding: EdgeInsets.all(16),
-              child: Text('A ideia é dividir responsabilidades em camadas independentes. Cada camada tem sua função e depende somente da anterior (ou de contratos/interfaces).', style: TextStyle(fontSize: 15)),
+  color: Colors.indigo.shade100,
+  shape: RoundedRectangleBorder(
+    borderRadius: BorderRadius.circular(12),
+  ),
+  elevation: 4,
+  child: Padding(
+    padding: const EdgeInsets.all(16),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Na Arquitetura Limpa, a ideia é dividir responsabilidades em camadas independentes. Cada camada tem sua função e depende somente da anterior (ou de contratos/interfaces).',
+          style: const TextStyle(fontSize: 15),
+        ),
+        const SizedBox(height: 12),
+        Text(
+          'As principais camadas são:',
+          style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Colors.indigo.shade800),
+        ),
+        const SizedBox(height: 16),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _buildLayerText(
+              '1. Domínio (usecases, entities, repositories): contém as regras de negócio (independente de frameworks).',
             ),
-          ),
+            _buildLayerText(
+              '2. Data (datasources, repositories, models): implementa os contratos definidos no domínio.',
+            ),
+            _buildLayerText(
+              '3. Presentation (bloc/riverpod, pages, widgets): interface com o usuário e controle de estado.',
+            ),
+          ],
+        ),
+      ],
+    ),
+  ),
+),
           SizedBox(height: 24),
+
+
+
+
+
           Text('1. Domain (Regras de Negócio)', style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Colors.white)),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           Text('🔹 O que é: É o coração da aplicação. Aqui ficam as regras de negócio puras, sem depender de Flutter, pacotes externos ou APIs.', style: TextStyle(color: Colors.grey[300])),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           Text('🔹 Responsabilidades:', style: TextStyle(color: Colors.grey[300])),
           _buildCodeCard(
             '''
@@ -131,8 +170,8 @@ lib/
   Widget _buildCodeCard(String text) {
     return Card(
       child: Padding(
-        padding: EdgeInsets.all(12),
-        child: Text(text, style: TextStyle(fontFamily: 'monospace', fontSize: 14)),
+        padding: const EdgeInsets.all(12),
+        child: Text(text, style: const TextStyle(fontFamily: 'monospace', fontSize: 14)),
       ),
     );
   }
@@ -140,10 +179,10 @@ lib/
   Widget _buildHighlightView(String code) {
     return Container(
       decoration: BoxDecoration(
-        color: Color(0xFF282A36),
+        color: const Color(0xFF282A36),
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: Color(0xFFBD93F9), width: 1.2),
-        boxShadow: [
+        border: Border.all(color: const Color(0xFFBD93F9), width: 1.2),
+        boxShadow: const [
           BoxShadow(
             color: Color(0x66000000),
             blurRadius: 8,
@@ -151,13 +190,23 @@ lib/
           ),
         ],
       ),
-      margin: EdgeInsets.symmetric(vertical: 6),
+      margin: const EdgeInsets.symmetric(vertical: 6),
       child: HighlightView(
         code,
         language: 'yaml',
         theme: draculaTheme,
-        padding: EdgeInsets.all(16),
-        textStyle: TextStyle(fontFamily: 'monospace', fontSize: 15),
+        padding: const EdgeInsets.all(16),
+        textStyle: const TextStyle(fontFamily: 'monospace', fontSize: 15),
+      ),
+    );
+  }
+
+  Widget _buildLayerText(String text) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      child: Text(
+        text,
+        style: const TextStyle(fontWeight: FontWeight.bold),
       ),
     );
   }
