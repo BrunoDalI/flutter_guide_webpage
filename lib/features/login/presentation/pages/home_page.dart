@@ -95,13 +95,13 @@ class HomePage extends StatelessWidget {
               child: BlocPage(),
             ),
             SizedBox(height: 16),
-            _buildSessionTile(
-              context,
-              icon: Icons.podcasts_outlined,
-              color: Color.fromARGB(255, 226, 45, 166),
-              title: 'Riverpod',
-              child: RiverpodPage(),
-            ),
+            // _buildSessionTile(
+            //   context,
+            //   icon: Icons.podcasts_outlined,
+            //   color: Color.fromARGB(255, 226, 45, 166),
+            //   title: 'Riverpod',
+            //   child: RiverpodPage(),
+            // ),
             SizedBox(height: 16),
             _buildSessionTile(
               context,
